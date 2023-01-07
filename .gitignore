@@ -1,5 +1,7 @@
 .idea/
 
+main_app/static/csv-files/
+
 # Created by https://www.gitignore.io/api/macos,linux,django,python,pycharm
 
 ### Django ###
