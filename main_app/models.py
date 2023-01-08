@@ -20,7 +20,7 @@ class Year(models.Model):
     year = models.SmallIntegerField(primary_key=True, verbose_name='Год')
 
 
-class Skills(models.Model):
+class Skill(models.Model):
     year = models.ForeignKey(Year, on_delete=models.CASCADE)
     skill = models.CharField(max_length=100, verbose_name='Навык')
     count = models.IntegerField(verbose_name='Количество вакансий')

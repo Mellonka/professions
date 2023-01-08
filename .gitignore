@@ -1,6 +1,8 @@
 .idea/
 
 main_app/static/csv-files/
+main_app/statistics/statistics.db
+main_app/statistics/vacancies_with_skills.csv
 
 # Created by https://www.gitignore.io/api/macos,linux,django,python,pycharm
 
