@@ -1,6 +1,5 @@
 .idea/
 
-main_app/static/csv-files/
 main_app/statistics/statistics.db
 main_app/statistics/vacancies_with_skills.csv
 

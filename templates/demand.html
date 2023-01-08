@@ -1,15 +1,69 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}
     Востребованность
 {% endblock %}
 
 {% block body %}
-    <div class="lead">
-        <h1>Востребованность</h1>
+    <div class="lead mb-4 pb-5 border-bottom">
+        <h1 class="mt-5 mb-4">Востребованность</h1>
         <p>
             Здесь собрана статистика вакансий по годам из HeadHunter,
             как в целом для IT-профессий, так и отдельно для iOS-разработчиков.
         </p>
     </div>
+
+    <div class="d-flex justify-content-center gap-2 mb-5">
+        <button class="btn btn-primary plots" style="width: 150px !important;">Графики</button>
+        <button class="btn btn-secondary tables" style="width: 150px !important;">Таблицы</button>
+    </div>
+
+    <div class="plots">
+        <ul class="list-group" style="margin: 0 !important; padding: 0 !important; list-style: none !important;">
+            <li class="list-item mb-5 pb-5">
+                <h2 class="mb-5 text-center">Зарплаты</h2>
+                <div class="row mb-4">
+                    <div class="w-50 d-flex flex-column justify-content-between text-center">
+                        <h3 class="mb-4">Уровень зарплаты по годам</h3>
+                        <img src="{% static "plots/salary_by_year.png" %}" alt="Зарплата по годам" class="w-100">
+                    </div>
+                    <div class="w-50 d-flex flex-column justify-content-between text-center">
+                        <h3 class="mb-4">Уровень зарплаты по годам для iOS-разработчика</h3>
+                        <img src="{% static "plots/selected_salary_by_year.png" %}"
+                             alt="Зарплата по годам для iOS-разработчика" class="w-100">
+                    </div>
+                </div>
+                <div class="row d-flex flex-column align-items-center justify-content-between text-center">
+                    <h3 class="mb-4">Сравнение зарплат</h3>
+                    <img src="{% static "plots/diff_salary.png" %}" alt="Сравнение" class="w-75 mr-auto ml-auto">
+                </div>
+            </li>
+            <li class="list-item mb-5">
+                <h2 class="mb-5 text-center">Количество вакансий</h2>
+                <div class="row mb-4">
+                    <div class="w-50 d-flex flex-column justify-content-between text-center">
+                        <h3 class="mb-4">Количество вакансий по годам</h3>
+                        <img src="{% static "plots/count_by_year.png" %}" alt="Количество вакансий по годам" class="w-100">
+                    </div>
+                    <div class="w-50 d-flex flex-column justify-content-between text-center">
+                        <h3 class="mb-4">Количество вакансий по годам для iOS-разработчика</h3>
+                        <img src="{% static "plots/selected_count_by_year.png" %}"
+                             alt="Количество вакансий по годам для iOS-разработчика" class="w-100">
+                    </div>
+                </div>
+                <div class="row d-flex flex-column justify-content-between align-items-center text-center">
+                    <h3 class="mb-4">Сравнение количества</h3>
+                    <img src="{% static "plots/diff_count.png" %}" alt="Сравнение" class="w-75">
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="tables">
+
+    </div>
+
+    <script src="{% static "scripts/demand.js" %}"></script>
 {% endblock %}
