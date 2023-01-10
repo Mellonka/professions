@@ -56,7 +56,7 @@ with sqlite3.connect('statistics.db') as db, open('vacancies_with_skills.csv', e
         salary_to = float(row[3]) if row[3] != '' else 0
         salary = get_salary(salary_from, salary_to, row[4], row[-1], db, currencies_header, cash)
 
-        if salary == None:
+        if salary == None or salary == 0:
             command = "INSERT INTO vacancies (name, key_skills, area_name, published_at) VALUES (?,?,?,?)"
             info = row[0], row[1], row[5], row[-1].split('T')[0]
         else:
