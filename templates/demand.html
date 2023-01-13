@@ -61,31 +61,34 @@
             </li>
         </ul>
     </div>
-
-    <table class="table table-striped text-center table-div d-none">
-        <tr>
-            <th>Год</th>
-            <th>Средняя зарплата в IT, ₽</th>
-            <th>Средняя зарплата iOS-разработчика, ₽</th>
-            <th>Количество IT-вакансий</th>
-            <th>Количество вакансий на iOS-разработчика</th>
-        </tr>
-        {% for d in statistics %}
+    <div class="table-div d-none text-center">
+        <h2 class="mb-5">Статистика по годам</h2>
+        <table class="table table-striped">
             <tr>
-                <td>{{ d.year }}</td>
-                <td>{{ d.salary }}</td>
-                <td>
-                    {% if d.chosen_salary != 0 %}
-                        {{ d.chosen_salary }}
-                    {% else %}
-                        -
-                    {% endif %}
-                </td>
-                <td>{{ d.count }}</td>
-                <td>{{ d.chosen_count }}</td>
+                <th>Год</th>
+                <th>Средняя зарплата в IT, ₽</th>
+                <th>Средняя зарплата iOS-разработчика, ₽</th>
+                <th>Количество IT-вакансий</th>
+                <th>Количество вакансий на iOS-разработчика</th>
             </tr>
-        {% endfor %}
-    </table>
+            {% for d in statistics %}
+                <tr>
+                    <td>{{ d.year }}</td>
+                    <td>{{ d.salary }}</td>
+                    <td>
+                        {% if d.chosen_salary != 0 %}
+                            {{ d.chosen_salary }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td>{{ d.count }}</td>
+                    <td>{{ d.chosen_count }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
 
     <script src="{% static "scripts/change_plots_tables.js" %}"></script>
 {% endblock %}

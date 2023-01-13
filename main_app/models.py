@@ -21,6 +21,21 @@ class Year(models.Model):
 
 
 class Skill(models.Model):
+    rank = models.SmallIntegerField(verbose_name='№', default=None)
     year = models.ForeignKey(Year, on_delete=models.CASCADE)
     skill = models.CharField(max_length=100, verbose_name='Навык')
     count = models.IntegerField(verbose_name='Количество вакансий')
+
+
+class Vacancy(models.Model):
+    name = models.TextField()
+    description = models.TextField()
+    skills = models.TextField()
+    company = models.CharField(max_length=100)
+    salary = models.IntegerField()
+    salary_currency = models.CharField(max_length=3, default='RUR')
+    area_name = models.CharField(max_length=100)
+    published_at = models.DateTimeField()
+    href = models.CharField(max_length=200, default=r'https://www.hh.ru/')
+
+
