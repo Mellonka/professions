@@ -54,9 +54,8 @@ def index(request):
 def geography(request):
     salary = Geography.objects.order_by('-salary').values()
     fraction = Geography.objects.order_by('-fraction').values()
-    path = Path(__file__).parent / r'static\tables\geography'
-    d = datetime()
     if len(salary) == 0 or len(fraction) == 0:
+        path = Path(__file__).parent / r'static\tables\geography'
         csv_to_db_for_geography(Geography, path / r'compile.csv')
         salary = Geography.objects.order_by('-salary').values()
         fraction = Geography.objects.order_by('-fraction').values()
