@@ -1,14 +1,12 @@
 from datetime import timedelta, datetime
 import re
-from functools import reduce
-
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Demand, Geography, Skill, Year, Vacancy
 from pathlib import Path
 import csv
 import requests
-import json, time
+import json
 
 
 def csv_to_db_for_demand(model, path_to_csv):
@@ -57,6 +55,7 @@ def geography(request):
     salary = Geography.objects.order_by('-salary').values()
     fraction = Geography.objects.order_by('-fraction').values()
     path = Path(__file__).parent / r'static\tables\geography'
+    d = datetime()
     if len(salary) == 0 or len(fraction) == 0:
         csv_to_db_for_geography(Geography, path / r'compile.csv')
         salary = Geography.objects.order_by('-salary').values()
@@ -91,6 +90,7 @@ def clear(s):
     s = re.sub(r'<[^>]+>', '', s)
     s = re.sub(r' +', ' ', s).strip()
     return s
+
 
 def to_db(vac):
     obj = Vacancy()
@@ -147,7 +147,7 @@ def last_vacancies(request):
     Vacancy.objects.all().delete()
     idies = get_idies(json.loads(data))
     vacancies_to_db(idies)
-    vacancies = Vacancy.objects.order_by('-published_at').values()
+    vacancies = Vacancy.objects.order_by('-published_at').values()[:10]
     return render(request, 'last_vacancies.html', context={'vacancies': vacancies})
 
 

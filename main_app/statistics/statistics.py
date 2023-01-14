@@ -8,19 +8,20 @@ import tkinter
 def save_df_as_plot(df, path, x_key, y_key):
     plt.rc('font', size=20)
     fig = plt.figure()
-    plt.subplots_adjust(top=1)
     fig.set_figheight(12)
     fig.set_figwidth(12)
     ax = fig.add_subplot(1, 1, 1)
     ax.grid(axis='y')
-    ax.bar(df[x_key], df[y_key])
-    ax.tick_params(axis='x', labelrotation=45)
-
-    # увидел на каком то сайте просто. другого способа пока не нашёл
-    for label in ax.get_xticklabels():
-        if x_key != 'Year':
-            label.set_fontsize(12)
-
+    if x_key == "Year" or x_key == 'skill':
+        if x_key == 'skill':
+            for label in ax.get_xticklabels():
+                label.set_fontsize(12)
+        plt.subplots_adjust(top=1)
+        ax.bar(df[x_key], df[y_key])
+        ax.tick_params(axis='x', labelrotation=30)
+    else:
+        plt.subplots_adjust(top=1, left=0.25)
+        ax.barh(df[x_key], df[y_key])
     fig.savefig(path)
 
 
@@ -49,6 +50,7 @@ matplotlib.use('TkAgg')
 db = sqlite3.connect('statistics.db')
 c = db.cursor()
 
+'''
 salary_by_year = pd.read_sql("SELECT strftime('%Y', published_at) as Year, ROUND(AVG(salary)) as avg_salary FROM vacancies WHERE salary is not null GROUP BY strftime('%Y', published_at)", db)
 salary_by_year.to_csv('../static/tables/demand/salary_by_year.csv', encoding='utf-8-sig', index=False)
 save_df_as_plot(salary_by_year, '../static/plots/salary_by_year.png', 'Year', 'avg_salary')
@@ -80,8 +82,10 @@ fraction_by_area = pd.read_sql(f"SELECT area_name, ROUND(COUNT(salary) / {len_ta
 fraction_by_area.to_csv('../static/tables/geography/fraction_by_area.csv', encoding='utf-8-sig', index=False)
 save_df_as_plot(fraction_by_area, '../static/plots/fraction_by_area.png', 'area_name', 'fraction_vacancies')
 
+
 save_plots(salary_by_year, selected_salary_by_year, 'Year', 'avg_salary', 'avg_salary_for_selected', '../static/plots/diff_salary.png', ['средняя з/п в IT', 'средняя з/п для iOS-разработчиков'])
 save_plots(count_by_year, selected_count_by_year, 'Year', 'count_vacancies', 'count_vacancies_for_selected', '../static/plots/diff_count.png', ['количество IT вакансий', 'количество вакансий iOS-разработчика'])
+'''
 
 for year in range(2003, 2022):
     command = f'''

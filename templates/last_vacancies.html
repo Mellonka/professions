@@ -19,34 +19,35 @@
         <input class="btn btn-primary" name="submit-input" type="submit" value="Получить">
     </form>
 
-    {% for vacancy in vacancies %}
-        <div class="card border-info mb-3" style="max-width: 50rem;">
-            <div class="card-header">Вакансия</div>
-            <div class="card-body">
-                <a href="{{ vacancy.href }}" target="_blank"><h2 class="card-title">{{ vacancy.name }}</h2></a>
-                <p>{{ vacancy.area_name }}<br><b>{{ vacancy.company }}</b></p>
-                {% if vacancy.description|length <= 100 %}
-                    <p class="card-text fs-5">{{ vacancy.description }}</p>
-                {% else %}
-                    <p class="card-text fs-5">{{ vacancy.description|slice:"0:100" }}...</p>
-                {% endif %}
-                {% if vacancy.skills|length <= 50 %}
-                    <p class="card-text">{{ vacancy.skills }}</p>
-                {% else %}
-                    <p class="card-text">{{ vacancy.skills|slice:"0:50" }}...</p>
-                {% endif %}
+    <div class="d-flex flex-wrap justify-content-between">
+        {% for vacancy in vacancies %}
+            <div class="card border-info mb-3" style="max-width: 49.5%">
+                <div class="card-header">Вакансия</div>
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <a href="{{ vacancy.href }}" target="_blank"><h2 class="card-title">{{ vacancy.name }}</h2></a>
+                    <p>{{ vacancy.area_name }}<br><b>{{ vacancy.company }}</b></p>
+                    {% if vacancy.description|length <= 100 %}
+                        <p class="card-text fs-5">{{ vacancy.description }}</p>
+                    {% else %}
+                        <p class="card-text fs-5">{{ vacancy.description|slice:"0:100" }}...</p>
+                    {% endif %}
+                    {% if vacancy.skills|length <= 50 %}
+                        <p class="card-text">{{ vacancy.skills }} </p>
+                    {% else %}
+                        <p class="card-text">{{ vacancy.skills|slice:"0:50" }}...</p>
+                    {% endif %}
 
-                <div class="d-flex card-text justify-content-between">
-                    <p class="d-block">
-                        <b>{{ vacancy.salary }} {{ vacancy.salary_currency }}</b>
-                    </p>
-                    <p class="d-block">
-                        {{ vacancy.published_at|date:"d.m.Y" }}, {{ vacancy.published_at|date:"H:i:s" }}
-                    </p>
+                    <div class="d-flex card-text justify-content-between">
+                        <p class="d-block">
+                            <b>{{ vacancy.salary }} {{ vacancy.salary_currency }}</b>
+                        </p>
+                        <p class="d-block">
+                            {{ vacancy.published_at|date:"d.m.Y" }}, {{ vacancy.published_at|date:"H:i:s" }}
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-    {% endfor %}
-
+        {% endfor %}
+    </div>
 
 {% endblock %}
